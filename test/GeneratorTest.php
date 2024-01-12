@@ -26,6 +26,7 @@ class GeneratorTest extends TestCase
     {
         $innerGenerator = (function () {
             yield 'inner';
+            yield 'inner second';
         })();
 
         $generator = Generator::yield($innerGenerator);
@@ -33,6 +34,6 @@ class GeneratorTest extends TestCase
         $this->assertInstanceOf(\Generator::class, $generator);
 
         $result = iterator_to_array($generator);
-        $this->assertEquals(['inner'], $result);
+        $this->assertEquals(['inner', 'inner second'], $result);
     }
 }
